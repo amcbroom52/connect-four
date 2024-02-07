@@ -11,7 +11,7 @@ const WIDTH = 7;
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-const board = []; // array of rows, each row is array of cells  (board[y][x])
+const BOARD = []; // array of rows, each row is array of cells  (board[y][x])
 // (board[5][0] would be the bottom-left spot on the board)
 
 /** makeBoard: fill in global `board`:
@@ -20,6 +20,14 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  for (let i = 0; i < HEIGHT; i++) {
+    //let row = new Array(WIDTH, null);  //[null, null, null, null, null, null, null]
+    const row = [];
+    for (let j = 0; j < WIDTH; j++) {
+      row.push(null);
+    }
+    BOARD.push(row);
+  }
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */

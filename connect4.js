@@ -82,14 +82,24 @@ function makeHtmlBoard() {
  *    (return null if filled) */
 
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 5
-  return 5;
+  // write the real version of this, rather than always returning 5
+  for(let y = 5; y >= 0; y--){
+    if(board[y][x] === null){
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // make a div and insert into correct table cell
+  const location = document.getElementById(`c-${y}-${x}`);
+  const piece = document.createElement("div");
+  piece.classList.add("piece");
+  piece.classList.add(`p${currPlayer}`);
+  location.append(piece);
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */

@@ -83,8 +83,8 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // write the real version of this, rather than always returning 5
-  for(let y = 5; y >= 0; y--){
-    if(board[y][x] === null){
+  for (let y = 5; y >= 0; y--) {
+    if (board[y][x] === null) {
       return y;
     }
   }
@@ -113,8 +113,28 @@ function checkForWin() {
    */
   function _win(cells) {
 
+    /*
+    // if the card has already been matched, can't click it again
+    if (clickedCard.classList.contains("matched") || clickedCard === card1) {
+      return;
+    }
+    */
+
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
+
+    let count = 0;
+    //let player = cells[0].firstChild.classList[1];
+    //console.log(player);
+
+    for (let cell of cells) {
+
+    }
+    /*
+    if (count === 4) {
+      return true;
+    }
+    */
 
   }
 
@@ -123,15 +143,15 @@ function checkForWin() {
   // ways to win: horizontal, vertical, diagonalDR, diagonalDL
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
-      // TODO: assign values to the below variables for each of the ways to win
+      // assign values to the below variables for each of the ways to win
       // horizontal has been assigned for you
       // each should be an array of 4 cell coordinates:
       // [ [y, x], [y, x], [y, x], [y, x] ]
 
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      let vert;
-      let diagDL;
-      let diagDR;
+      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      let diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+      let diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
@@ -161,7 +181,8 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update global `board` variable with new piece
+  // add line to update global `board` variable with new piece
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win

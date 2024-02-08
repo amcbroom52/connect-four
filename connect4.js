@@ -123,19 +123,28 @@ function checkForWin() {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
 
-    let count = 0;
     //let player = cells[0].firstChild.classList[1];
     //console.log(player);
+    // const player = board[cells[0][0], cells[0][1]];
+    // if(player === null) return false;
+    // console.log("how many times");
+    console.log(`cells: ${cells}`);
+
 
     for (let cell of cells) {
+      const cellX = cell[1];
+      const cellY = cell[0];
+      console.log(`cell: ${cell}`);
+      // console.log(`x = ${cellX}, y = ${cellY}`);
+      if((cellX < 0 || cellX >= WIDTH) ||
+        (cellY < 0 || cellY >= HEIGHT) ||
+        (board[cellY][cellX] !== currPlayer)){
+        return false;
+      }
 
     }
-    /*
-    if (count === 4) {
-      return true;
-    }
-    */
 
+    return true;
   }
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
@@ -192,9 +201,13 @@ function handleClick(evt) {
 
   // check for tie: if top row is filled, board is filled
   // TODO: check if all cells in board are filled; if so, call endGame
+  if(!board[0].includes(null)){
+    endGame();
+  }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  currPlayer = (currPlayer === 1) ? 2 : 1;
 }
 
 /** Start game. */
